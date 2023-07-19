@@ -2,8 +2,18 @@ let userFormEl = document.querySelector("#user-form");
 let nameInputEl = document.querySelector("#username");
 let repoContainerEl = document.querySelector("#repos-container");
 let repoSearchTerm = document.querySelector("#repo-search-term");
+let languageButtonsEl = document.querySelector("#language-buttons")
 
 // URL = "https://api.github.com/users/octocat/repos"
+
+let buttonClickHandler = function(event) {
+    let language = event.target.getAttribute("data-language");
+    if(language) {
+        getFeaturedRepos(language);
+
+        repoContainerEl.textContent = "";
+    }
+}
 
 let formSubmitHandler = function(event) {
     event.preventDefault();
@@ -20,6 +30,19 @@ let formSubmitHandler = function(event) {
     }
 }
 
+let getFeaturedRepos = function(language) {
+    var apiUrl = "https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues";
+
+    fetch(apiUrl).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data) {
+                displayRepos(data.items, language);
+            });
+        }else {
+            alert('Error: ' + response.statusText);
+        }
+    });
+}
 
 let getUserRepos = function (user) {
     let apiUrl = "https://api.github.com/users/" + user + "/repos";
@@ -36,7 +59,7 @@ let getUserRepos = function (user) {
     .catch(function(error) {
         alert("Unable to connect to GitHub")
     })
-} 
+};
 
 // display search result
 let displayRepos = function(repos, searchTerm) {
@@ -45,7 +68,7 @@ let displayRepos = function(repos, searchTerm) {
         repoContainerEl.textContent = "No repos found";
         return;
     }
-    repoSearchTerm.textContent =searchTerm;
+    repoSearchTerm.textContent = searchTerm;
 
     for (let i = 0; i < repos.length; i++) {
         // format repo name
@@ -77,3 +100,4 @@ let displayRepos = function(repos, searchTerm) {
 }
 
 userFormEl.addEventListener("submit", formSubmitHandler);
+languageButtonsEl.addEventListener("click", buttonClickHandler);
