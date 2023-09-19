@@ -15,7 +15,7 @@ This app searches for Github users' repository issues, user is able to search th
 ---
 
 ## Installation
-
+ Visit [git-issues-search](https://edm1001.github.io/git-it-done/)
 
 ---
 
