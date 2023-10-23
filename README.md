@@ -43,8 +43,8 @@ Edmer Franciz Valencia
 
 ## Question
 Contact me through either:
-[GitHub](https://github.com/edm1001)
-[Email: edmerfranciz@gmail.com](mailto:edmerfranciz@gmail.com)
+- [GitHub](https://github.com/edm1001)
+- [Email: edmerfranciz@gmail.com](mailto:edmerfranciz@gmail.com)
 
 ---
 
